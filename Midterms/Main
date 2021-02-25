@@ -1,0 +1,144 @@
+package com.company;
+
+
+import java.util.Random;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        //Card Deck
+        CardStack stack = new CardStack();
+        CardStack hand = new CardStack();
+        CardStack discardedPile = new CardStack();
+        Random randomCommands = new Random();
+
+        int i;
+        for (i = 0; i < 6; i++)
+        {
+            stack.push(new Card("King of Hearts"));
+            stack.push(new Card("Queen of Hearts"));
+            stack.push(new Card("King of Diamonds"));
+            stack.push(new Card("Ace of Spades"));
+            stack.push(new Card("Joker"));
+        }
+
+        while (stack.cardSize() > 0)
+        {
+            commands(stack, hand, discardedPile, randomCommands);
+            cardStats(stack, hand, discardedPile);
+        }
+
+    }
+
+    public static void commands(CardStack stack, CardStack hand, CardStack discardedPile,  Random randomCommands)
+    {
+        int commands;
+        commands = 1 + randomCommands.nextInt(3);
+
+        if (commands == 1)
+        {
+
+            int cardDraw;
+            cardDraw = 1 + randomCommands.nextInt(5);
+            if (cardDraw > stack.cardSize())
+            {
+                for (int x = 0; x < stack.cardSize(); x++)
+                {
+                    Card variable = stack.peek();
+                    hand.push(variable);
+                    stack.pop();
+                }
+            }
+            else if (stack.cardSize() == 0)
+            {
+                System.out.println("Discarded pile empty");
+            }
+            else {
+                for (int x = 0; x < cardDraw; x++)
+                {
+                    Card variable = stack.peek();
+                    hand.push(variable);
+                    stack.pop();
+                }
+            }
+           //cardDraw = 1 + randomCommands.nextInt(5);
+           System.out.println("You will draw " + cardDraw + " cards.");
+
+        }
+
+        else if (commands == 2)
+        {
+            int cardDraw;
+            cardDraw = 1 + randomCommands.nextInt(5);
+            if (cardDraw > hand.cardSize())
+            {
+                for (int x = 0; x < hand.cardSize(); x++)
+                {
+                    Card variable = hand.peek();
+                    discardedPile.push(variable);
+                    hand.pop();
+                }
+            }
+            else if (hand.cardSize() == 0)
+            {
+                System.out.println("There are no cards");
+            }
+            else {
+                for (int x = 0; x < cardDraw; x++)
+                {
+                    Card variable = hand.peek();
+                    discardedPile.push(variable);
+                    hand.pop();
+                }
+            }
+
+            //cardDraw = 1 + randomCommands.nextInt(5);
+            System.out.println("You discard " + cardDraw + " cards.");
+
+            //System.out.println(hand.cardSize());
+
+        }
+
+        else if (commands == 3)
+        {
+            int cardDraw;
+            cardDraw = 1 + randomCommands.nextInt(5);
+            if (cardDraw > discardedPile.cardSize())
+            {
+                for (int x = 0; x < discardedPile.cardSize(); x++)
+                {
+                    Card variable = discardedPile.peek();
+                    hand.push(variable);
+                    discardedPile.pop();
+                }
+            }
+            else if (discardedPile.cardSize() == 0)
+            {
+                System.out.println("There are no cards");
+            }
+            else {
+                for (int x = 0; x < cardDraw; x++)
+                {
+                    Card variable = discardedPile.peek();
+                    hand.push(variable);
+                    discardedPile.pop();
+                }
+            }
+            //cardDraw = 1 + randomCommands.nextInt(5);
+            System.out.println("You will get " + cardDraw + " cards from the discarded pile.");
+            //System.out.println(discardedPile.cardSize());
+        }
+    }
+
+    public static void cardStats(CardStack stack, CardStack hand, CardStack discardedPile)
+    {
+        System.out.println("The cards in your hand are: ");
+        hand.printCard();
+        System.out.println("The number of cards in the deck are: " + stack.cardSize());
+        System.out.println("The number of the cards in the discarded pile are: " + discardedPile.cardSize());
+    }
+
+
+
+}
