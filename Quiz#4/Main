@@ -1,0 +1,27 @@
+package com.company;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+	    Player ploo = new Player(134, "Plooful", 453);
+	    Player wardell = new Player(312, "TSM Wardell", 424);
+	    Player deadlJimmy = new Player(25, "DeadlyJimmy", 564);
+	    Player subroza = new Player(568, "Subroza", 125);
+	    Player annieDro = new Player(785, "C9 Annie", 58);
+
+	    SimpleHashtable hashtable = new SimpleHashtable();
+	    hashtable.put(ploo.getUserName(), ploo);
+        hashtable.put(wardell.getUserName(), wardell);
+        hashtable.put(deadlJimmy.getUserName(), deadlJimmy);
+        hashtable.put(subroza.getUserName(), subroza);
+        hashtable.put(annieDro.getUserName(), annieDro);
+
+        hashtable.printHashtable();
+        //System.out.println(hashtable.get("Subroza"));
+        hashtable.remove("Subroza");
+
+        System.out.println("After removing: \n");
+        hashtable.printHashtable();
+    }
+}
