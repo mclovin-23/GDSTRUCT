@@ -1,0 +1,72 @@
+package com.company;
+import java.util.Random;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Random randomPlayers = new Random();
+        ArrayQueue queue = new ArrayQueue(15);
+        int game = 0;
+
+        while (game < 10) {
+            playerQueue(randomPlayers, queue);
+            if (queue.size() < 5) {
+
+                playerQueue(randomPlayers, queue);
+
+            }
+
+            for (int x = 0; x < 5; x++) {
+                queue.remover();
+            }
+
+            queue.printQueue();
+            game++;
+            System.out.println("Press Any Key To Continue...");
+            new java.util.Scanner(System.in).nextLine();
+        }
+
+
+
+
+            //ArrayQueue inMatch = new ArrayQueue(15);
+
+            //queue.printQueue();
+
+            //System.out.println("");
+            //inMatch.add(queue.peek());
+
+            //System.out.println("In match: " + queue.remover() + "\n");
+            //System.out.println("In current match: ");
+            //inMatch.printQueue();
+
+
+            //System.out.println("Press Any Key To Continue...");
+            //new java.util.Scanner(System.in).nextLine();
+
+    }
+
+    public static void playerQueue(Random randomPlayers, ArrayQueue queue)
+    {
+
+        int players;
+        players = 1 + randomPlayers.nextInt(7);
+
+        System.out.println("Players in matchmaking queue: " + players);
+
+        System.out.println("PLayers added: " + players);
+        for(int i = 0; i < players; i++)
+        {
+            queue.add(new Player(1, "Random Player", 100));
+
+        }
+
+        //queue.add(new Player(2, "Sinatraa", 100));
+        //queue.add(new Player(3, "Subroza", 95));
+        //queue.add(new Player(4, "mikee", 90));
+        //queue.add(new Player(5, "flex", 100));
+        //queue.add(new Player(6, "mclovin", 86));
+        //queue.add(new Player(7, "lol", 69));
+    }
+
+}
